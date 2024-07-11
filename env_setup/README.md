@@ -2,8 +2,10 @@
 First lets start by setting up the docker environment. We will be configuring it with Ubuntu 20.04 OS and install KVM along with it.
 
 1. Create a Dockerfile:
-   `nano DockerFile`
-2. In the text editor, copy and paste this content:
+   ```
+   nano DockerFile
+   ```
+3. In the text editor, copy and paste this content:
 
    ```
    #Use Ubuntu 20.04 as a base image
@@ -25,9 +27,11 @@ First lets start by setting up the docker environment. We will be configuring it
    ```
    Ctrl+S to save the file and then press Ctrl+X to close it.
 4. Now, in the terminal run this to build the docker image from the docker file:
-   `docker build -t ubuntu-kvm-docker .`
+   ```
+   docker build -t ubuntu-kvm-docker .
+   ```
 
-5. Run the Docker container with the necessary permissions:
+6. Run the Docker container with the necessary permissions:
    ```
    docker run --device /dev/kvm --cap-add SYS_ADMIN --name ubuntu-kvm-container -it ubuntu-kvm-docker
    ```
