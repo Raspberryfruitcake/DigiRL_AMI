@@ -24,5 +24,10 @@ First lets start by setting up the docker environment. We will be configuring it
    USER root
    ```
    Ctrl+S to save the file and then press Ctrl+X to close it.
-4. Now, in the terminal run this:
+4. Now, in the terminal run this to build the docker image from the docker file:
    `docker build -t ubuntu-kvm-docker .`
+
+5. Run the Docker container with the necessary permissions:
+   ```
+   docker run --device /dev/kvm --cap-add SYS_ADMIN --name ubuntu-kvm-container -it ubuntu-kvm-docker
+   ```
