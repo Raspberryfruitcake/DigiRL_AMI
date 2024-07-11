@@ -4,4 +4,6 @@ First lets start by setting up the docker environment. We will be configuring it
 1. Create a Dockerfile:
    `nano DockerFile`
 2. In the text editor, copy and paste this content:
-   
+   ```#Use Ubuntu 20.04 as a base image
+      FROM ubuntu:20.04
+   ```
