@@ -4,6 +4,7 @@ First lets start by setting up the docker environment. We will be configuring it
 1. Create a Dockerfile:
    `nano DockerFile`
 2. In the text editor, copy and paste this content:
+
    ```
    #Use Ubuntu 20.04 as a base image
    FROM ubuntu:20.04
@@ -23,5 +24,5 @@ First lets start by setting up the docker environment. We will be configuring it
    USER root
    ```
    Ctrl+S to save the file and then press Ctrl+X to close it.
-3. Now, in the terminal run this:
+4. Now, in the terminal run this:
    `docker build -t ubuntu-kvm-docker .`
