@@ -22,3 +22,6 @@ First lets start by setting up the docker environment. We will be configuring it
    # Keep the user as root
    USER root
    ```
+   Ctrl+S to save the file and then press Ctrl+X to close it.
+3. Now, in the terminal run this:
+   `docker build -t ubuntu-kvm-docker .`
