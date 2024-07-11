@@ -7,4 +7,18 @@ First lets start by setting up the docker environment. We will be configuring it
    ```
    #Use Ubuntu 20.04 as a base image
    FROM ubuntu:20.04
+
+   # Install necessary packages for KVM
+   RUN apt-get update && apt-get install -y \
+       qemu-kvm \
+       libvirt-daemon-system \
+       libvirt-clients \
+       bridge-utils \
+       && apt-get clean
+
+   # Set the working directory
+   WORKDIR /root
+   
+   # Keep the user as root
+   USER root
    ```
