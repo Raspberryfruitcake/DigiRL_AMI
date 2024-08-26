@@ -294,5 +294,24 @@ python <path_to_digirl_repo>/env_setup/screenshot.py # keep trying this command 
 # wait for half a minute...
 # screenshot saved to <current_path>/screenshot.png
 ```
+You should now see a screenshot like this: 
 
+<img src="../assets/screenshot1.png" alt="screenshot1" width="100"/>
+
+Now go back to the emulator terminal tab. Use ctrl+c to exit the emulator, and you should see 
+
+bash
+ctrl+c
+# INFO    | Saving with gfxstream=1
+# ERROR   | stop: Not implemented (ignore this error)
+
+
+Now execute this command to check whether the snapshot is successfully saved:
+
+bash
+emulator -avd test_Android "-no-window" "-no-audio" "-skip-adb-auth" "-no-boot-anim" "-gpu" "auto" "-no-snapshot-save"
+# Successfully loaded snapshot 'default_boot'
+
+
+Congratulations! You're good to go now. Close all tabs and move on the main README for the experiments.
 
