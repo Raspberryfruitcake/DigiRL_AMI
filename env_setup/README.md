@@ -197,3 +197,14 @@ cd avd
 gdown --id 1QhBNhvZTQhJzugUsDv-rRrevm8qsb03U
 unzip test_Android.zip
 ```
+You have now successfully copied the Pixel 28 device that we use for our research.
+
+### KVM Acceleration
+
+In order to launch the emulator, check whether `kvm` is reachable on your machine. Simply run this command to check:
+
+```bash
+ls /dev/kvm
+# /dev/kvm -> you have KVM support
+# ls: cannot access '/dev/kvm': No such file or directory -> you don't have KVM support
+```
