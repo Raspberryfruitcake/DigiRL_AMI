@@ -163,22 +163,22 @@ emulator -version
 # ...
 ```
 ### Install Conda and gdown
-'''
+```
 wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O anaconda.sh
 sudo bash anaconda.sh -b -p /opt/anaconda
 rm anaconda.sh
 export PATH="/opt/anaconda/bin:$PATH"
 conda init
 source ~/.bashrc
-'''
+```
 
 Now, we create a new conda environment named 'digirl' configured for python 3.10:
-'''
+```
 conda create --name digirl python=3.10
 conda activate digirl
-'''
+```
 Now, in this environment we install gdown which allows us to download files from google drive:
-'''
+```
 pip3 install gdown
-'''
+```
 
