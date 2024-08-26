@@ -181,4 +181,19 @@ Now, in this environment we install gdown which allows us to download files from
 ```
 pip3 install gdown
 ```
+## Android Virtual Device (AVD) Initialization
+In the next step, we create an AVD snapshot as the environment. 
 
+### Device Creation
+
+Download the device image [here](https://drive.google.com/drive/folders/1ZGKrWiSoGqg8_NoIGT7rWmiZ8CXToaBF?usp=sharing).
+
+Unzip the device image to `$ANDROID_HOME/avd`.
+
+```bash
+cd $ANDROID_HOME
+mkdir avd
+cd avd
+gdown --id 1QhBNhvZTQhJzugUsDv-rRrevm8qsb03U
+unzip test_Android.zip
+```
