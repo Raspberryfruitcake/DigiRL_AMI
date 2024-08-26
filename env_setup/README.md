@@ -226,6 +226,11 @@ emulator -avd test_Android "-no-window" "-no-audio" "-skip-adb-auth" "-no-boot-a
 
 A successful launch should show `Cold boot: requested by the user` in the end. Now open a new terminal tab, you should be able to see an online devices through `adb`:
 
+To open a new terminal in the docker:
+```
+docker exec -it <CONTAINER ID> bash
+```
+
 ```bash
 adb devices
 # List of devices attached
