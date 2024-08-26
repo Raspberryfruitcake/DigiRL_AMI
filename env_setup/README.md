@@ -300,18 +300,18 @@ You should now see a screenshot like this:
 
 Now go back to the emulator terminal tab. Use ctrl+c to exit the emulator, and you should see 
 
-bash
+```bash
 ctrl+c
 # INFO    | Saving with gfxstream=1
 # ERROR   | stop: Not implemented (ignore this error)
-
+```
 
 Now execute this command to check whether the snapshot is successfully saved:
 
-bash
+```bash
 emulator -avd test_Android "-no-window" "-no-audio" "-skip-adb-auth" "-no-boot-anim" "-gpu" "auto" "-no-snapshot-save"
 # Successfully loaded snapshot 'default_boot'
-
+```
 
 Congratulations! You're good to go now. Close all tabs and move on the main README for the experiments.
 
