@@ -75,3 +75,30 @@ First lets start by setting up the docker environment. We will be configuring it
            --network host \
            -it my-cuda-container
    ```
+
+# Environment Installation
+## Android Software Development Kit (SDK)
+### Install Java (JDK 8)
+Download a Java Development Kit 8 (v1.8.0) release version from the open-source Java releaser [OpenLogic](https://www.oracle.com/java/technologies/downloads/). Install using your Linux package installer, like `apt` or `rpm`. For example, on a Debian server:
+
+```bash
+sudo apt-get update
+cd ~ && mkdir install-android/ && cd install-android
+wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64-deb.deb
+sudo apt install ./openlogic-openjdk-8u412-b08-linux-x64-deb.deb
+```
+
+If you already has a java binary previously, you should also do this:
+
+```bash
+sudo update-alternatives --config java # select /usr/lib/jvm/openlogic-openjdk-8-hotspot-amd64/bin/java
+```
+
+Check whether the installation is successful by `java -version`. You should expect the output shows version 1.8.0. Higher versions makes `sdkmanager` crash.
+
+```bash
+java -version
+# openjdk version "1.8.0_412-412"
+# OpenJDK Runtime Environment (build 1.8.0_412-412-b08)
+# OpenJDK 64-Bit Server VM (build 25.412-b08, mixed mode)
+```
