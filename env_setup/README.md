@@ -208,3 +208,105 @@ ls /dev/kvm
 # /dev/kvm -> you have KVM support
 # ls: cannot access '/dev/kvm': No such file or directory -> you don't have KVM support
 ```
+
+### Installing Additional Packages
+sudo apt-get install -y libpulse0 libpulse-dev
+sudo apt-get install -y libxkbfile1 libxkbfile-dev
+
+### Device Bootstrapping
+
+Now check whether you can successfully run an AVD instance with KVM acceleration by starting an emulator:
+
+```bash
+emulator -avd test_Android "-no-window" "-no-audio" "-skip-adb-auth" "-no-boot-anim" "-gpu" "auto" "-no-snapshot-load"
+# ...
+# Cold boot: requested by the user
+# INFO    | Boot completed in 12579 ms
+```
+
+A successful launch should show `Cold boot: requested by the user` in the end. Now open a new terminal tab, you should be able to see an online devices through `adb`:
+
+```bash
+adb devices
+# List of devices attached
+# emulator-5554   device
+```
+
+## Remote Driver: Appium
+
+Now **don't close the emulator** and open a new terminal tab. We use `appium` as the bind between Python (software) and the Android device (hardware). 
+
+### Install Node.js
+
+Appium is based on Node.js. On a Linux system, simply do
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+# the order matters, first install nodesource then install nodejs
+```
+
+Now check the installation through `node -v`:
+
+```bash
+node -v
+# v18.19.0
+```
+
+### Install Appium
+
+Now install `appium` using Node.js **globally**. Avoid local installations to avoid messing up the `digirl` repo. Also install the `uiautomator2` driver for `appium`.
+
+```bash
+sudo npm i --location=global appium
+appium driver install uiautomator2
+```
+
+Now in the `digirl` conda environment, install the Python interface for Appium (you should have created the `digirl` environment in the main README):
+
+```bash
+conda activate digirl
+pip install Appium-Python-Client # this should already be installed using requirements.txt, but better double-check
+```
+
+## Final Step: AVD Snapshot for Quickboot
+
+Now we create an AVD snapshot for quickboot. This avoids bootstrapping the device every time we launch it by saving a bootstrapped snapshot.
+
+### Install Device Interface for Appium
+
+First, launch `appium`:
+
+```bash
+appium --relaxed-security
+```
+
+Then open a new terminal tab (now you should have 3 tabs, one running Android emulator, one running appium, and this new one) and execute the screenshot script:
+
+```bash
+# wait for half a minute... (if you do screenshot right away, you will get errors cmd: Can't find service: settings. allow some time for emulator to install the packages.)
+python <path_to_digirl_repo>/env_setup/screenshot.py # keep trying this command till it no longer raises errors
+# wait for half a minute...
+# screenshot saved to <current_path>/screenshot.png
+```
+
+You should now see a screenshot like this: 
+
+<img src="../assets/screenshot1.png" alt="screenshot1" width="100"/>
+
+Now go back to the emulator terminal tab. Use `ctrl+c` to exit the emulator, and you should see 
+
+```bash
+ctrl+c
+# INFO    | Saving with gfxstream=1
+# ERROR   | stop: Not implemented (ignore this error)
+```
+
+Now execute this command to check whether the snapshot is successfully saved:
+
+```bash
+emulator -avd test_Android "-no-window" "-no-audio" "-skip-adb-auth" "-no-boot-anim" "-gpu" "auto" "-no-snapshot-save"
+# Successfully loaded snapshot 'default_boot'
+```
+
+Congratulations! You're good to go now. Close all tabs and move on the main README for the experiments.
