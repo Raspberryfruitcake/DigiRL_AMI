@@ -102,3 +102,63 @@ java -version
 # OpenJDK Runtime Environment (build 1.8.0_412-412-b08)
 # OpenJDK 64-Bit Server VM (build 25.412-b08, mixed mode)
 ```
+### Install SDK Manager
+
+Download the Android SDK for Linux from the [official website](https://developer.android.com/studio/index.html#downloads). For your convenience, you can also directly download the [installation package](https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip).
+
+```bash
+wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+```
+
+Now specify the android installation path and unzip the installation package to that path. It's recommended to use `/home/<username>/.android` as the default installation path.
+
+```bash
+export ANDROID_HOME="/home/docker-user/.android" # recommended: /home/<username>/.android
+mkdir -p $ANDROID_HOME
+unzip sdk-tools-linux-4333796.zip -d $ANDROID_HOME
+```
+
+Make sure you have `unzip` installed. For example, use `sudo apt install unzip -y` to install on Debian servers. To check whether the unzip is successful:
+
+```bash
+ls $ANDROID_HOME
+# tools
+```
+
+### SDK Emulator
+
+Prior to install the SDK emulators, set the environment variables:
+
+```bash
+echo "export ANDROID_HOME=$ANDROID_HOME" >> ~/.bashrc
+echo 'export SDK=$ANDROID_HOME' >> ~/.bashrc
+echo 'export ANDROID_SDK_ROOT=$ANDROID_HOME' >> ~/.bashrc
+echo 'export PATH=$SDK/emulator:$SDK/tools:$SDK/tools/bin:$SDK/platform-tools:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Now you should be able to locate the `sdkmanager` binary:
+
+```bash
+which sdkmanager
+# .../tools/bin/sdkmanager
+```
+
+Then install the Android emulator 28 (other versions should also work, but the offline data we provided is in version 28):
+
+```bash
+yes | sdkmanager "platform-tools" "platforms;android-28" "emulator"
+yes | sdkmanager "system-images;android-28;google_apis;x86_64"
+yes | sdkmanager "build-tools;28.0.0"
+```
+
+Now you should be able to view the version of the emulator:
+
+```bash
+emulator -version
+# INFO    | Storing crashdata in: /tmp/android-<username>/emu-crash-34.2.14.db, detection is enabled for process: 16670
+# INFO    | Android emulator version 34.2.14.0 (build_id 11834374) (CL:N/A)
+# INFO    | Storing crashdata in: /tmp/android-<username>/emu-crash-34.2.14.db, detection is enabled for process: 16670
+# INFO    | Duplicate loglines will be removed, if you wish to see each individual line launch with the -log-nofilter flag.
+# ...
+```
