@@ -73,5 +73,5 @@ First lets start by setting up the docker environment. We will be configuring it
            --group-add $(getent group kvm | cut -d: -f3) \
            -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
            --network host \
-           -it digirl_docker
+           -it my-cuda-container
    ```
