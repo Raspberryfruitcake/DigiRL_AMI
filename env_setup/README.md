@@ -61,12 +61,17 @@ First lets start by setting up the docker environment. We will be configuring it
    CMD ["/bin/bash"]
    ```
    Ctrl+S to save the file and then press Ctrl+X to close it.
-4. Now, in the terminal run this to build the docker image from the docker file:
+3. Now, in the terminal run this to build the docker image from the docker file:
    ```
-   docker build -t ubuntu-kvm-docker .
+   docker build -t my-cuda-container .
    ```
 
-6. Run the Docker container with the necessary permissions:
+4. Run the Docker container with the necessary permissions:
    ```
-   docker run --device /dev/kvm --cap-add SYS_ADMIN --name ubuntu-kvm-container -it ubuntu-kvm-docker
+   docker run --gpus all \
+           --device /dev/kvm \
+           --group-add $(getent group kvm | cut -d: -f3) \
+           -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
+           --network host \
+           -it digirl_docker
    ```
