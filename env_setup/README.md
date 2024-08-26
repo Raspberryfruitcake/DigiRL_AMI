@@ -5,7 +5,7 @@ First lets start by setting up the docker environment. We will be configuring it
    ```
    nano DockerFile
    ```
-3. In the text editor, copy and paste this content:
+2. In the text editor, copy and paste this content:
 
 ```
 FROM ubuntu:20.04
